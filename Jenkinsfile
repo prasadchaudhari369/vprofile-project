@@ -35,32 +35,32 @@ pipeline {
             }
         }
 
-        // stage('Sonarqube Analysis') {
-        //     steps{
-        //         withSonarQubeEnv(credentialsId: 'sqa_4d2e36cc2e012af5b269c8ca6e11388bc557e894', installationName: 'sonar'){
-        //             sh 'mvn clean package sonar:sonar'
-        //         }
-        //     }
-        // }
-        // stage('NexusArtifactUploader'){
-        //     steps {
-        //         nexusArtifactUploader(
-        //             nexusVersion: 'nexus3',
-        //             protocol: 'http',
-        //             nexusUrl: 'my.nexus.address',
-        //             groupId: 'com.example',
-        //             version: version,
-        //             repository: 'RepositoryName',
-        //             credentialsId: 'CredentialsId',
-        //             artifacts: [
-        //                 [artifactId: projectName,
-        //                 classifier: '',
-        //                 file: 'my-service-' + version + '.jar',
-        //                 type: 'jar']
-        //             ]
-        //         )
-        //     }
-        // }
+        stage('Sonarqube Analysis') {
+            steps{
+                withSonarQubeEnv(credentialsId: 'sqa_4d2e36cc2e012af5b269c8ca6e11388bc557e894', installationName: 'sonar'){
+                    sh 'mvn clean package sonar:sonar'
+                }
+            }
+        }
+        stage('NexusArtifactUploader'){
+            steps {
+                nexusArtifactUploader(
+                    nexusVersion: 'nexus3',
+                    protocol: 'http',
+                    nexusUrl: 'my.nexus.address',
+                    groupId: 'com.example',
+                    version: version,
+                    repository: 'RepositoryName',
+                    credentialsId: 'CredentialsId',
+                    artifacts: [
+                        [artifactId: projectName,
+                        classifier: '',
+                        file: 'my-service-' + version + '.jar',
+                        type: 'jar']
+                    ]
+                )
+            }
+        }
 
         stage('Build The Image'){
             steps {
