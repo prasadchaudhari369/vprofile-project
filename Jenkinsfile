@@ -77,7 +77,7 @@ pipeline {
 
         stage('Push') {
             steps {
-                sh 'docker push prasadchaudhari369/nforum-app:v1'
+                sh 'docker push prasadchaudhari369/visualpath:v1'
             }
         }
 
